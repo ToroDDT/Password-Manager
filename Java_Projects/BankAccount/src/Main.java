@@ -14,6 +14,12 @@ public class Main {
                     int startingBalance = read.nextInt();
                     Account newAccount = new Account(accountNumber, accountType, nameOfAccount, startingBalance);
                 }
+                System.out.println("***Banking Application System***");
+                System.out.println("1. Display all account details");
+        System.out.println("2. Search by Account number");
+        System.out.println("3. Deposit the amount");
+        System.out.println("4. Withdraw the amount");
+        System.out.println("Exit");
         }
     }
 
