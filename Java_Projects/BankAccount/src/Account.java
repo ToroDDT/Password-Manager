@@ -22,7 +22,9 @@ public class Account {
     public void withdraw (int amount ){
         int newBalance = this.balance - amount;
     }
-
+    public void  add() {
+        String hello = this.name;
+    }
 
     }
 
