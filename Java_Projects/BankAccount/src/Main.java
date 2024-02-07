@@ -23,6 +23,9 @@ public class Main {
         System.out.println("3. Deposit the amount");
         System.out.println("4. Withdraw the amount");
         System.out.println("Exit");
+        System.out.println("Enter your choice:");
+        Scanner read = new Scanner(System.in);
+        int usersChoice = read.nextInt();
         }
     }
 
