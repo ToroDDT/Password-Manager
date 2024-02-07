@@ -1,6 +1,8 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
+        ArrayList<Account> listOfAccounts = new ArrayList<Account>();
             int usersAdded = 0;
                 while (usersAdded > 0) {
                     Scanner read = new Scanner(System.in);
@@ -13,6 +15,7 @@ public class Main {
                     System.out.print("Enter Account starting balance");
                     int startingBalance = read.nextInt();
                     Account newAccount = new Account(accountNumber, accountType, nameOfAccount, startingBalance);
+                    listOfAccounts.add(newAccount);
                 }
                 System.out.println("***Banking Application System***");
                 System.out.println("1. Display all account details");
