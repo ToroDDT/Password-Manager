@@ -4,7 +4,7 @@ package com.example.Backend.Entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import javax.persistence.Id;
 
 @Entity
 public class User {
@@ -16,6 +16,13 @@ public class User {
 
     public Integer getId() {
         return id;
+    }
+    public User(){
+
+    }
+    public User(String userName, String email){
+        this.userName = userName;
+        this.email = email;
     }
 
     public void setId(Integer id) {
