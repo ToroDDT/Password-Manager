@@ -1,11 +1,8 @@
 package dev.david.OnePassword.passwordGenerator;
 
-import ch.qos.logback.core.joran.sanity.Pair;
 import dev.david.OnePassword.form_data.PasswordFormData;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.List;
 
 
 public class PasswordGenTool {
@@ -14,35 +11,25 @@ public class PasswordGenTool {
     public Object passwordArray () {
         return new ArrayList<Object>();
     }
-    private GeneratedNumbersArrPair generateNumbers (int minAmount, int maxAmount ) {
-        Random rand = new Random();
-
-        int randomNumberBetweenMaxAndMin = minAmount + (int)(Math.random() * (maxAmount - minAmount));
-        //An array that contains random numbers
-        ArrayList<Integer> randomNumberArr = new ArrayList<>();
-        ArrayList<Integer> randomNumberArrMax = new ArrayList<>();
-        //Given a certain amount generate random number and add to array
-        for (int i = 0; i < randomNumberBetweenMaxAndMin; i++){
-            int randomNumber = rand.nextInt(10);
-            randomNumberArr.add(randomNumber);
+    private static ArrayList<String> generateNumbers ( int maxAmount ) {
+       // Create an instance of Random Class
+        Random random = new Random();
+       // Create a list to store RandomNumbers that are generated
+       ArrayList<int> randomNumbersList = new ArrayList<int>();
+       for(int i = 0; i < maxAmount; i++){
+           // Generate Random Number between 0 - 11
+           int randomNumber = random.nextInt(10);
+           randomNumbersList.add(randomNumber);
+       }
+       // Create an array list of type string to store converted integers to strings
+        ArrayList<String> randomNumbersListStringVersion = new ArrayList<>();
+       // convert randomNumbersList type to string
+        for (Integer num : randomNumbersList){
+            randomNumbersListStringVersion.add(num.toString());
         }
-        for (int i = 0; i < maxAmount; i++){
-            int randomNumber = rand.nextInt(10);
-            randomNumberArrMax.add(randomNumber);
-        }
-
-        ArrayList<String> randomNumbersArrContainingMinLimitToString = new ArrayList<>(randomNumberArr.size());
-        randomNumberArr.forEach(number -> randomNumbersArrContainingMinLimitToString.add(String.valueOf(number)));
-
-        ArrayList<String> randomNumbersArrMaxToString= new ArrayList<>(randomNumberArrMax.size());
-        randomNumberArrMax.forEach(number -> randomNumbersArrMaxToString.add(String.valueOf(number)));
-
-        GeneratedNumbersArrPair generatedNumbersArrPair = new GeneratedNumbersArrPair();
-        generatedNumbersArrPair.setRandomNumbersArr(randomNumbersArrContainingMinLimitToString);
-        generatedNumbersArrPair.setRandomNumbersArrMax(randomNumbersArrMaxToString);
-        return generatedNumbersArrPair;
+        return randomNumbersListStringVersion;
     }
-    private ArrayList<String> generateLowerCaseLetters (int maxAmount) {
+    private static ArrayList<String> generateLowerCaseLetters (int maxAmount) {
         Random rand = new Random();
         char[] alphabetLowerCase = new char[26];
         ArrayList<String> randomLowerCaseLettersArr = new ArrayList<>();
@@ -55,7 +42,7 @@ public class PasswordGenTool {
         }
         return randomLowerCaseLettersArr;
     }
-    private ArrayList<String> generateUpperCaseLetters (int maxAmount) {
+    private static ArrayList<String> generateUpperCaseLetters (int maxAmount) {
         Random rand = new Random();
         char[] alphabetUpperCase = new char[26];
         ArrayList<String> randomUpperCaseLettersArr = new ArrayList<>();
@@ -69,17 +56,14 @@ public class PasswordGenTool {
         return randomUpperCaseLettersArr;
     }
 
-    private ArrayList<String> generateSpecialLetters () {
+    private static ArrayList<String> generateSpecialLetters () {
         return new ArrayList<>(Arrays.asList("@","%","!","$"));
     }
-    public String generateRandomPassword (int max, int min, PasswordFormData passwordFormData) {
+    public String generateRandomPassword (PasswordFormData passwordFormData) {
         String[] characterArr = new String[passwordFormData.getLength()];
         ArrayList<ArrayList<String>> multiDimList = new ArrayList<>();
 
         var lengthOfCharacterArr = characterArr.length;
-        var randomPasswordArrResults = generateNumbers(min, max);
-        var randomNumbersArrMax = randomPasswordArrResults.getRandomNumbersArrMax();
-        var randomNumbersArrMin = randomPasswordArrResults.getRandomNumbersArr();
 
         if (passwordFormData.getA_z()) {
             multiDimList.add(generateLowerCaseLetters(passwordFormData.getLength()));
@@ -91,15 +75,38 @@ public class PasswordGenTool {
             multiDimList.add((generateSpecialLetters()));
         }
         if(passwordFormData.getZeroToNine()) {
-            multiDimList.add(generateNumbers(passwordFormData.getMin_number(), passwordFormData.getLength()));
+            multiDimList.add(generateNumbers(passwordFormData.getLength()));
         }
-        ArrayList<Object> singleDimList = new ArrayList<>();
+        ArrayList<String> flattenList = flatten(multiDimList);
+        ArrayList<String> randomizedChars = randomizedCharacters(flattenList);
+        String newPassword = concatenateArrayList(randomizedChars);
+        return concatenateArrayList(randomizedChars);
+    }
 
-        for (ArrayList<Object> subList : randomGeneratedCharacters) {
-            singleDimList.addAll(subList);
+    public static String concatenateArrayList (ArrayList<String> array) {
+        StringBuilder arrayListToString = new StringBuilder();
+        for (String element : array) {
+            arrayListToString.append(element);
         }
-        for()
+        return arrayListToString.toString();
+    }
 
+    public static ArrayList<String> randomizedCharacters(ArrayList<String> flattenList) {
+        Random rand = new Random();
+        ArrayList<String> randomizedChars = new ArrayList<>();
+        int lengthOfList = flattenList.size();
+        for (int i = 0; i < lengthOfList; i++){
+            int randomIndex = rand.nextInt(lengthOfList - 1);
+            randomizedChars.add(flattenList.get(randomIndex));
+        }
+        return randomizedChars;
+    }
+    public static ArrayList<String> flatten(ArrayList<ArrayList<String>> twoDimList) {
+        ArrayList<String> flatList = new ArrayList<>();
+        for (List<String> subList : twoDimList) {
+            flatList.addAll(subList);
+        }
+        return flatList;
     }
 
     public String getPassword() {
