@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Generator</h1>
+        <div th:text="${generatedPassword}"></div>
+    <form>
+     <div>
+         <div>Password type?</div>
+         <label for="password">
+             <input type="radio" value="Password" id="password" name="password" > Username
+         </label>
+         <label for="passphrase">
+             <input type="radio" value="PassPhrase" id="passphrase" name="passphrase"> Password
+         </label>
+         <div th:replace="password :: passwordForm"></div>
+     </div>
+    </form>
+</body>
+</html>

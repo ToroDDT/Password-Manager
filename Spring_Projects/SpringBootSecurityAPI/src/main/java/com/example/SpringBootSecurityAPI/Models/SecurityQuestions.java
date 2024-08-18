@@ -1,5 +1,7 @@
 package com.example.SpringBootSecurityAPI.Models;
 
+import jakarta.persistence.Entity;
+//@Entity
 public class SecurityQuestions {
     private String security_question_1;
     private String security_answer_1;

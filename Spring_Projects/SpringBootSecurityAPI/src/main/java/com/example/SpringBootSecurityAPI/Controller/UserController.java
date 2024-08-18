@@ -1,7 +1,12 @@
 package com.example.SpringBootSecurityAPI.Controller;
 
 import com.example.SpringBootSecurityAPI.Entity.User;
+import com.example.SpringBootSecurityAPI.Entity.UserAccountDTO;
 import com.example.SpringBootSecurityAPI.Repository.AccountRepository;
+import com.example.SpringBootSecurityAPI.SecurityConfig.LoginRequestDTO;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import jakarta.validation.Valid;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
@@ -11,21 +16,21 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Optional;
 
-//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class UserController {
     @Autowired
     AccountRepository accountRepo;
-    @PostMapping("/create")
-    public void createUser(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String role, @RequestParam String security_question_1, @RequestParam String security_answer_1, @RequestParam String security_question_2, @RequestParam String security_answer_2, @RequestParam String security_question_3, @RequestParam String security_answer_3) {
-        User user = new User(username,password, email, role, security_question_1, security_answer_1, security_question_2, security_answer_2, security_question_3, security_answer_3);
-        accountRepo.save(user);
-        System.out.println(user);
+
+    @PostMapping("/create/account")
+    public ResponseEntity<UserAccountDTO> createAccount(@RequestBody @Valid UserAccountDTO userAccount) {
+        accountRepo.save(userAccount);
+        return null;
     }
 
     @DeleteMapping("/delete")
     public void deleteUser(@RequestParam String username) {
-            accountRepo.deleteByUserName(username);
+            accountRepo.deleteByUsername(username);
     }
 
     @PatchMapping("/update/account{id}")
