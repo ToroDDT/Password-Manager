@@ -15,7 +15,7 @@ public class PasswordGenTool {
        // Create an instance of Random Class
         Random random = new Random();
        // Create a list to store RandomNumbers that are generated
-       ArrayList<int> randomNumbersList = new ArrayList<int>();
+       ArrayList<Integer> randomNumbersList = new ArrayList<Integer>();
        for(int i = 0; i < maxAmount; i++){
            // Generate Random Number between 0 - 11
            int randomNumber = random.nextInt(10);
@@ -59,7 +59,7 @@ public class PasswordGenTool {
     private static ArrayList<String> generateSpecialLetters () {
         return new ArrayList<>(Arrays.asList("@","%","!","$"));
     }
-    public String generateRandomPassword (PasswordFormData passwordFormData) {
+    public void generateRandomPassword (PasswordFormData passwordFormData) {
         String[] characterArr = new String[passwordFormData.getLength()];
         ArrayList<ArrayList<String>> multiDimList = new ArrayList<>();
 
@@ -78,9 +78,9 @@ public class PasswordGenTool {
             multiDimList.add(generateNumbers(passwordFormData.getLength()));
         }
         ArrayList<String> flattenList = flatten(multiDimList);
-        ArrayList<String> randomizedChars = randomizedCharacters(flattenList);
+        ArrayList<String> randomizedChars = randomizedCharacters(flattenList, passwordFormData.getLength());
         String newPassword = concatenateArrayList(randomizedChars);
-        return concatenateArrayList(randomizedChars);
+        setPassword(newPassword);
     }
 
     public static String concatenateArrayList (ArrayList<String> array) {
@@ -91,11 +91,12 @@ public class PasswordGenTool {
         return arrayListToString.toString();
     }
 
-    public static ArrayList<String> randomizedCharacters(ArrayList<String> flattenList) {
+    public static ArrayList<String> randomizedCharacters(ArrayList<String> flattenList, int length) {
         Random rand = new Random();
         ArrayList<String> randomizedChars = new ArrayList<>();
+
         int lengthOfList = flattenList.size();
-        for (int i = 0; i < lengthOfList; i++){
+        for (int i = 0; i < length; i++){
             int randomIndex = rand.nextInt(lengthOfList - 1);
             randomizedChars.add(flattenList.get(randomIndex));
         }
