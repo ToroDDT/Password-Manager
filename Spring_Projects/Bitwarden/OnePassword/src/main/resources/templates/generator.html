@@ -1,23 +1,41 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>OnePassword Generation Tool</title>
     <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
     <h1>Generator</h1>
-        <div th:text="${generatedPassword}"></div>
-    <form>
-     <div>
-         <div>Password type?</div>
-         <label for="password">
-             <input type="radio" value="Password" id="password" name="password" > Username
-         </label>
-         <label for="passphrase">
-             <input type="radio" value="PassPhrase" id="passphrase" name="passphrase"> Password
-         </label>
-         <div th:replace="password :: passwordForm"></div>
-     </div>
+        <div th:text="${newPassword}"></div>
+    <form th:action="@{/tools/generator}" th:object="${passwordFormData}" method="post" >
+        <div>
+            <div>Length</div>
+            <label for="length">
+                <input th:field="*{length}" type="number" name="length" step="1" id="length" min="5" max="15"/>
+            </label>
+            <div>Minimum numbers</div>
+            <label for="min-number">
+                <input th:field="*{min_number}" type="number" name="min-number" step="1" id="min-number" min="0" max="14"/>
+            </label>
+            <div>Options</div>
+            <div>LowerCase a-z</div>
+            <label for="a-z">
+                <input th:field="*{a_z}" type="checkbox" id="a-z" name="a-z" value="true"> a-z
+            </label>
+            <div>A-Z</div>
+            <label for=capital-A-Z>
+                <input th:field="*{capital_A_Z}" type="checkbox" name="capital-A-Z"  id="capital-A-Z" value="true"/> A-Z
+            </label>
+            <div>0-9</div>
+            <label for="0-9">
+                <input th:field="*{zeroToNine}" type="checkbox" name="0-9" id="0-9" value="true"/>
+            </label>
+            <div>Special Characters</div>
+            <label for="specialCharacters">
+                <input th:field="*{specialCharacters}" type="checkbox" name="specialCharacters" id="specialCharacters" value="true"/>
+            </label>
+        </div>
+        <p><input type="submit" value="Submit" />
     </form>
 </body>
 </html>
