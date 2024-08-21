@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>OnePassword messenger</title>
+    <link th:href="@{/css/chatAPP.css}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+    <script src="/app.js"></script>
+</head>
+<body>
+<div class="sidebar">
+    <div class="sidebar-header">Channels</div>
+    <div class="channels">
+        <div class="channel"># General</div>
+        <div class="channel"># Random</div>
+        <div class="channel"># Development</div>
+    </div>
+</div>
+<div class="main">
+    <div class="header">
+        <div># General</div>
+        <div>
+            <button id="connect" class="btn btn-default" type="submit">Connect</button>
+            <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect </button>
+        </div>
+    </div>
+    <div id="messages" class="messages">
+        <div>Hello!</div>
+    </div>
+
+    <div class="footer">
+        <form>
+            <label for="message"></label>
+            <input type="text" id="message" class="input" placeholder="Type a message...">
+            <button id="send" class="btn btn-default" type="submit">Send</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
