@@ -1,0 +1,34 @@
+.password {
+    display: flex;
+    border-style: solid;
+    font-size: 19px;
+    font-weight: thin;
+    border-width: thin;
+    text-align: center;
+    justify-content: center;
+    border-color: #B8B8B8;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    max-width: 800px;
+}
+.Regenerate-btn {
+    background-color: #175ddc;
+    text-color: white;
+    font-weight: bold;
+    padding: 8px;
+    border-color: #175ddc;
+    color: #fff;
+    border-radius: .25rem;
+    border: none;
+}
+.GeneratorOptions {
+    display: flex;
+    flex-direction: column;
+
+}
+.section-space {
+    margin-top: 10px
+}
+.determine-length-section{
+    display: flex;
+}
