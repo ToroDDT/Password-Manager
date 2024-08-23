@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Passphrase</title>
+</head>
+<body>
+
+<div th:fragment="passPhrase" class="Generator">
+    <h2>Generator</h2>
+    <div class="password" th:text="${newPassword}"></div>
+    <form th:action="@{/tools/generator/pass-phrase}" th:object="${passPhraseFormData}" method="post" >
+        <div>
+            <div class="section-space">
+                <div class="options">What would you like to generate?</div>
+                <label for="passwordOption">
+                    <input type="radio" value="password" name="password" id="passwordOption"/> Password
+                </label>
+                <label for="username">
+                    <input type="radio" value="username" name="username" id="username"/> Username
+                </label>
+            </div>
+            <div class="section-space">
+                <div class="options">Password Type</div>
+                <label for="password">
+                    <input type="radio" value="password" name="password" id="password"/> Password
+                </label>
+                <label for="passPhrase">
+                    <input type="radio" value="passPhrase" name="passPhrase" id="passPhrase"/> Passphrase
+                </label>
+            </div>
+            <div class="section-space determine-length-section">
+                <div>
+                    <div class="options">Number of Words </div>
+                    <label for="numberOfWords">
+                        <input th:field="*{numberOfWords}" type="number" name="numberOfWords" step="1" id="numberOfWords"/>
+                    </label>
+                </div>
+                <div>
+                    <div class="options" >Word separator</div>
+                    <label for="wordSeparator">
+                        <input th:field="*{wordSeparator}" type="text" name="wordSeparator" step="1" id="wordSeparator" />
+                    </label>
+                </div>
+            </div>
+            <div class="section-space">
+                <div class="options">Options</div>
+                <div class="GeneratorOptions">
+                    <label for="capitalize">
+                        <input th:field="*{capitalize}" type="checkbox" id="capitalize" name="capitalize" value="true"> a-z
+                    </label>
+                    <label for="includeNumber">
+                        <input th:field="*{includeNumber}" type="checkbox" name="includeNumber"  id="includeNumber" value="true"/> A-Z
+                    </label>
+                </div>
+            </div>
+        </div>
+        <input class="Regenerate-btn section-space" type="submit" value="Regenerate password" />
+        <input class="Regenerate-btn section-space" type="button" value="Copy password"/>
+    </form>
+</div>
+</body>
+</html>
