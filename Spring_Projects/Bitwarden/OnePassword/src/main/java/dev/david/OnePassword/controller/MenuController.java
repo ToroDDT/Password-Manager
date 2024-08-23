@@ -1,6 +1,7 @@
 package dev.david.OnePassword.controller;
 
 import dev.david.OnePassword.form_data.PasswordFormData;
+import dev.david.OnePassword.form_data.PassPhraseFormData;
 import dev.david.OnePassword.passwordGenerator.PasswordGenTool;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,9 +13,17 @@ import java.util.Random;
 public class MenuController {
     @PostMapping("/tools/generator")
     public String displayGeneration(@ModelAttribute PasswordFormData passwordFormData, Model model) {
-        PasswordGenTool newPassword = new PasswordGenTool();
-        newPassword.generateRandomPassword(passwordFormData);
-        model.addAttribute("newPassword", newPassword.getPassword());
+        if( passwordFormData.getLength() < 5 ) {
+            model.addAttribute("lengthNeeded", "please provide the desired length of password that is above 5");
+            return "generator";
+        }
+        if (!passwordFormData.getZeroToNine() && !passwordFormData.getA_z() && !passwordFormData.getCapital_A_Z() && !passwordFormData.getSpecialCharacters()) {
+            model.addAttribute("selectOption", "Please select at least one of the options");
+        } else {
+            PasswordGenTool newPassword = new PasswordGenTool();
+            newPassword.generateRandomPassword(passwordFormData);
+            model.addAttribute("newPassword", newPassword.getPassword());
+        }
         return "generator";
     }
     @GetMapping("/tools/generator")
