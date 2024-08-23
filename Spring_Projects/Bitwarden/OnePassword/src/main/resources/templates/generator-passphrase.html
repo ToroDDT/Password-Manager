@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>OnePassword Generation Tool</title>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/generator.css}" rel="stylesheet">
+    <link th:href="@{/css/sideNavigation.css}" rel="stylesheet">
+</head>
+<body>
+    <div th:replace="/fragments/sideNavBar :: sideNavigation"></div>
+    <div th:replace="/fragments/passPhrase"></div>
+</body>
+</html>
