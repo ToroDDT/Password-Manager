@@ -26,10 +26,15 @@ public class MenuController {
         }
         return "generator";
     }
-    @GetMapping("/tools/generator")
+    @GetMapping("/tools/generator/password")
     public String generatorTool(Model model) {
         model.addAttribute("passwordFormData", new PasswordFormData());
-        return "generator";
+        return "generator-password";
     }
 
+    @GetMapping("/tools/generator/pass-phrase")
+    public String showGeneratorPassPhrase(Model model) {
+        model.addAttribute("passPhraseFormData", new PassPhraseFormData());
+        return "generator-passphrase";
+    }
 }
