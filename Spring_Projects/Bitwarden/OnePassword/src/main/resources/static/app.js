@@ -62,8 +62,9 @@ $(function () {
 
 document.getElementById("passPhrase").addEventListener("click", {
     location.replace("http://localhost8080/tools/generator/pass-phrase")
-})
+});
 
 document.getElementById("password").addEventListener("click", {
     location.replace("http://localhost8080/tools/generator/password")
-})
+});
+console.log("hello");

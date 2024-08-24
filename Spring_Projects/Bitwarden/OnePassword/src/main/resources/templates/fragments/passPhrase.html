@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Passphrase</title>
+    <script src="/app.js"></script>
 </head>
 <body>
 
@@ -14,19 +15,19 @@
             <div class="section-space">
                 <div class="options">What would you like to generate?</div>
                 <label for="passwordOption">
-                    <input type="radio" value="password" name="password" id="passwordOption"/> Password
+                    <input type="radio" value="true" name="type" id="passwordOption"/> Password
                 </label>
                 <label for="username">
-                    <input type="radio" value="username" name="username" id="username"/> Username
+                    <input type="radio" value="true" name="type" id="username"/> Username
                 </label>
             </div>
             <div class="section-space">
                 <div class="options">Password Type</div>
                 <label for="password">
-                    <input type="radio" value="password" name="password" id="password"/> Password
+                    <input type="radio" value="password" name="passwordType" id="password" onchange="switchToPasswordPage(this)"/> Password
                 </label>
                 <label for="passPhrase">
-                    <input type="radio" value="passPhrase" name="passPhrase" id="passPhrase"/> Passphrase
+                    <input type="radio" value="passPhrase" name="passwordType" id="passPhrase" onchange="switchToPassPhrasePage(this)"/> Passphrase
                 </label>
             </div>
             <div class="section-space determine-length-section">
