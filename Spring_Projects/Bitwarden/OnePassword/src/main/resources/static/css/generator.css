@@ -1,3 +1,10 @@
+* {
+    font-family: sans-serif;
+}
+
+.error {
+    color: red;
+}
 .password {
     display: flex;
     border-style: solid;
@@ -31,4 +38,18 @@
 }
 .determine-length-section{
     display: flex;
+}
+body {
+    display: flex;
+    margin: 0;
+    height: 100%;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+    height: 100%
+}
+.Generator {
+    margin-left: 25px;
 }
