@@ -8,15 +8,24 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class PassPhraseGenTool {
-    private ArrayList<String> passPhrase;
-    private String word;
-    public String readFileOfWords() {
+    private String passPhrase;
+    private ArrayList<String> randomWords;
+    public String getPassPhrase() {
+        return passPhrase;
+    }
+    public void setPassPhrase(Integer length) {
+        this.passPhrase = Arrays.toString(generatePassPhrase(length));
+    }
+    public void setPassPhrase(Integer length, String divider) {
+        this.passPhrase = Arrays.toString(generatePassPhrase(length, divider));
+    }
+    public void readFileOfWords() {
         try {
             File file = new File("words.txt");
             Scanner myFile = new Scanner(file);
             while (myFile.hasNextLine()) {
                 String word = myFile.nextLine();
-                setWord(word);
+                this.randomWords.add(word);
             }
             myFile.close();
         } catch (FileNotFoundException e) {
@@ -24,12 +33,15 @@ public class PassPhraseGenTool {
             e.printStackTrace();
         }
     }
-    public ArrayList getPassPhrase() {
-        return passPhrase;
-    }
-
-    public void setPassPhrase(ArrayList passPhrase) {
-        this.passPhrase = passPhrase;
+   private String[] generatePassPhrase(Integer length) {
+        Random random = new Random();
+        readFileOfWords();
+        String[] newPassPhrase = new String[length];
+        for (int i = 0; i < length; i++){
+            int randomIndex = random.nextInt(206);
+            newPassPhrase[i] = this.randomWords.get(randomIndex);
+        }
+        return newPassPhrase;
     }
     private String[] generatePassPhrase(Integer length, String divider) {
         Random random = new Random();
