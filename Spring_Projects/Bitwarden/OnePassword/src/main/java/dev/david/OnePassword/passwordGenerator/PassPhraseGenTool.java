@@ -3,6 +3,8 @@ package dev.david.OnePassword.passwordGenerator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class PassPhraseGenTool {
@@ -21,7 +23,6 @@ public class PassPhraseGenTool {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        return null;
     }
     public ArrayList getPassPhrase() {
         return passPhrase;
@@ -30,17 +31,18 @@ public class PassPhraseGenTool {
     public void setPassPhrase(ArrayList passPhrase) {
         this.passPhrase = passPhrase;
     }
-
-    public String getWord() {
-        return word;
+    private String[] generatePassPhrase(Integer length, String divider) {
+        Random random = new Random();
+        readFileOfWords();
+        String[] newPassPhrase = new String[(length * 2)];
+        for (int i = 0; i < length; i++){
+            if (i % 2 == 0) {
+                int randomIndex = random.nextInt(206);
+                newPassPhrase[i] = this.randomWords.get(randomIndex);
+            } else {
+                newPassPhrase[i] = divider;
+            }
+        }
+        return newPassPhrase;
     }
-
-    public void setWord(String word) {
-        this.word = word;
-    }
-    // Generate a word
-
-    // add generated word to arraylist
-
-    // add special divider after each word
 }
